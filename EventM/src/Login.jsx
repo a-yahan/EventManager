@@ -2,22 +2,26 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import {auth} from './firebase.jsx'
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [userName, setUserName] = useState("")
     const [passWord, setPassWord] = useState("")
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             //FIREBASE AUTHENTICATION 
-            App.auth().signInWithEmailAndPassword(userName, passWord)
+            await signInWithEmailAndPassword(auth,userName, passWord)
             console.log("successfully logged in")
-
+            navigate('/userprofile')
         }
+
         catch(error)
             {
                 console.log(error)
+                alert("Invalid Username or Password")
             }
 
     }
