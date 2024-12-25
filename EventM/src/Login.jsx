@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
-
+import {auth} from './firebase.jsx'
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 function Login() {
     const [userName, setUserName] = useState("")
@@ -10,6 +11,8 @@ function Login() {
         e.preventDefault()
         try {
             //FIREBASE AUTHENTICATION 
+            App.auth().signInWithEmailAndPassword(userName, passWord)
+            console.log("successfully logged in")
 
         }
         catch(error)
